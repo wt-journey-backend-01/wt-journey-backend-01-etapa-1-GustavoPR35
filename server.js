@@ -49,23 +49,6 @@ app.post('/contato', (req, res) => {
     const email = req.body.email
     const assunto = req.body.assunto
     const mensagem = req.body.mensagem
-
-    const params = new URLSearchParams({
-        nome,
-        email,
-        assunto,
-        mensagem
-    })
-
-    res.redirect(`/contato-recebido?${params.toString()}`)
-})
-
-app.get('/contato-recebido', (req, res) => {
-    const nome = req.query.nome
-    const email = req.query.email
-    const assunto = req.query.assunto
-    const mensagem = req.query.mensagem
-
     res.status(200).send(`
         <head>
             <link rel="stylesheet" href="/css/style.css">
@@ -84,30 +67,6 @@ app.get('/contato-recebido', (req, res) => {
         </body>
     `)
 })
-
-// app.post('/contato', (req, res) => {
-//     const nome = req.body.nome
-//     const email = req.body.email
-//     const assunto = req.body.assunto
-//     const mensagem = req.body.mensagem
-//     res.status(200).send(`
-//         <head>
-//             <link rel="stylesheet" href="/css/style.css">
-//         </head>
-//         <body>
-//             <main>
-//                 <header>
-//                     <a href="/">DevBurger</a>
-//                 </header>
-//                 <h1>Agradecemos pela mensagem!</h1>
-//                 <p>Nome: ${nome}</p>
-//                 <p>Email: ${email}</p>
-//                 <p>Assunto: ${assunto}</p>
-//                 <p>Mensagem: ${mensagem}</p>
-//             </main>
-//         </body>
-//     `)
-// })
 
 // Trata rotas não existentes
 app.use((req, res) => {
