@@ -4,30 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevBurger</title>
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <main>
-        <header>
-            <div>
+        <nav>
+            <div class="logo-container">
+                <img src="/image/devburger-logo.svg" alt="Logo da DevBurger" class="logo">
                 <a href="/">DevBurger</a>
             </div>
-            <div>
-                <a href="/contato">Contato</a>
-                <a href="/api/lanches">Lanches</a>
+            <div class="nav-links">
+                <a href="/contato">CONTATO</a>
+                <a href="/api/lanches">LANCHES</a>
             </div>
-        </header>
-        <h1>Sugerir lanche</h1>
-        <form id="form-sugerir-lanche" action="/sugestao" method="get">
-            <label for="form-sugerir-nome">Nome do lanche</label>
-            <input type="text" id="form-sugerir-nome" name="nome">
-            <label for="form-sugerir-ingredientes">Ingredientes</label>
-            <textarea id="form-sugerir-ingredientes" name="ingredientes"></textarea>
-            <button type="submit">Enviar</button>
-        </form>
+        </nav>
+        <section class="cardapio-section">
+            <h1>Cardápio</h1>
+            <ul id="cardapio-list">
+                <li>
+                    <h2 class="cardapio-item-nome">DevBurger Clássico</h2>
+                    <p class="cardapio-item-ingredientes">Pão brioche, Carne 150g, Queijo cheddar, Alface americana, Tomate fresco, Molho especial</p>
+                    <div class="cardapio-line-break">
+                </li>
+                <li>
+                    <h2 class="cardapio-item-nome">DevBurger Clássico</h2>
+                    <p class="cardapio-item-ingredientes">Pão brioche, Carne 150g, Queijo cheddar, Alface americana, Tomate fresco, Molho especial</p>
+                    <div class="cardapio-line-break"></div>
+                </li>
+                <li>
+                    <h2 class="cardapio-item-nome">DevBurger Clássico</h2>
+                    <p class="cardapio-item-ingredientes">Pão brioche, Carne 150g, Queijo cheddar, Alface americana, Tomate fresco, Molho especial</p>
+                </li>
+            </ul>
+        </section>
+        <section class="sugerir-lanche-section">
+            <h1>Sugerir lanche</h1>
+            <div class="form-div">
+                <form id="form-sugerir-lanche" action="/sugestao" method="get">
+                    <label for="form-sugerir-nome">NOME</label>
+                    <input type="text" id="form-sugerir-nome" name="nome" placeholder="Insira o nome do lanche">
+                    <label for="form-sugerir-ingredientes">INGREDIENTES</label>
+                    <textarea id="form-sugerir-ingredientes" name="ingredientes" placeholder="Insira os ingredientes"></textarea>
+                    <button type="submit">ENVIAR</button>
+                </form>
+            </div>
+        </section>
     </main>
+    <script>
+        async function getCardapio() {
+            const url = window.location.origin + '/api/lanches'
+            try {
+                const response = await fetch(url)
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`)
+                }
+                const json = await response.json()
+                preencherCardapio(json)
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        function preencherCardapio(lanches) {
+            const cardapio = document.getElementById('cardapio-list')
+            cardapio.innerHTML = ''
+            lanches.forEach((lanche, index) => {
+                const li = document.createElement('li')
+                li.innerHTML = `
+                    <h2 class="cardapio-item-nome">${lanche.nome.toUpperCase()}</h2>
+                    <p class="cardapio-item-ingredientes">${lanche.ingredientes}</p>
+                    ${index < lanches.length - 1 ? '<div class="cardapio-line-break"></div>' : ''}
+                `
+                cardapio.appendChild(li)
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', getCardapio)
+    </script>
 </body>
 </html>

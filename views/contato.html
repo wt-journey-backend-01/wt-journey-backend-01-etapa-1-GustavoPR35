@@ -4,27 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <main>
-        <header>
-            <div>
+        <nav>
+            <div class="logo-container">
+                <img src="/image/devburger-logo.svg" alt="Logo da DevBurger" class="logo">
                 <a href="/">DevBurger</a>
             </div>
-        </header>
-        <h1>Contato</h1>
-        <form id="form-contato" action="/contato" method="post">
-            <label for="form-contato-nome">Nome</label>
-            <input type="text" id="form-contato-nome" name="nome">
-            <label for="form-contato-email">Email</label>
-            <input type="email" id="form-contato-email" name="email">
-            <label for="form-contato-assunto">Assunto</label>
-            <input type="text" id="form-contato-assunto" name="assunto">
-            <label for="form-contato-mensagem">Mensagem</label>
-            <textarea id="form-contato-mensagem" name="mensagem"></textarea>
-            <button type="submit">Enviar</button>
-        </form>
+            <div class="nav-links">
+                <a href="/contato">CONTATO</a>
+                <a href="/api/lanches">LANCHES</a>
+            </div>
+        </nav>
+        <section class="contato">
+            <h1>Contato</h1>
+            <div class="form-div">
+                <form id="form-contato" action="/contato" method="post">
+                    <label for="form-contato-nome">NOME</label>
+                    <input type="text" id="form-contato-nome" name="nome">
+                    <label for="form-contato-email">EMAIL</label>
+                    <input type="email" id="form-contato-email" name="email">
+                    <label for="form-contato-assunto">ASSUNTO</label>
+                    <input type="text" id="form-contato-assunto" name="assunto">
+                    <label for="form-contato-mensagem">MENSAGEM</label>
+                    <textarea id="form-contato-mensagem" name="mensagem"></textarea>
+                    <button type="submit">ENVIAR</button>
+                </form>
+            </div>
+        </section>
     </main>
 </body>
 </html>
